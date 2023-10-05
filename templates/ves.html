@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ВИЭ</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="static/css/style.css">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+  
+</head>
+
+{% if form_visible %}
+<body>
+
+  <a href="/" class="btn btn-success">Форма Т2</a>   
+
+<style>
+  input[type="submit"] {
+    background-color: #f1f1f1;
+    color: black;
+    font-size: 11px;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 2px solid #4caf50; /* Green */
+    box-shadow: 0 7px 16px 0 rgba(0, 0, 0, 0.4), 0 6px 21px 0 rgba(0, 0, 0, 0.19);
+    margin:35px 35px 35px 300px;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #4caf50; /* Green */
+    color: white;
+  }
+
+</style>
+
+<div id="select">
+
+  <form method ="post" action="/ves.html">
+    <label for="year"></label>
+    <select type="number" id = "year" name ="year" class="selectpicker" data-actions-box="true" multiple="multiple">
+      <option class="optionGroup" selected disabled>Выберите год(а) </option>
+      {% for year in range(2018, now.year+1) %}
+      <option value="{{ year }}"{% if year in selected_years %} selected{% endif %}>{{ year }}</option>
+      {% endfor %}
+    </select><br><br>
+
+    <label for="station"></label>
+    <select type="text" id ="station" name="station" class="selectpicker" data-live-search="true" data-actions-box="true" multiple="multiple">
+      <option class="optionGroup" selected disabled>Выбор станций </option>
+      {% for station in stations_ves %}
+      <option value="{{ station }}"{% if station in selected_stations %} selected{% endif %}>{{ station }}</option>
+      {% endfor %}
+    </select><br><br>
+
+    <label for="indicator"></label>
+    <select type="text" id = "indicator" name ="indicator" class="selectpicker" data-live-search="true" data-actions-box="true" multiple="multiple">
+      <option class="optionGroup" selected disabled>Выбор показателей </option>
+      {% for indicator in indicators_ves %}
+      <option value="{{ indicator }}"{% if indicator in selected_indicators %} selected{% endif %}>{{ indicator }}</option>
+      {% endfor %}
+    </select><br><br>
+
+    <label for="columns">  </label>
+    <select type="text" id = "columns" name ="columns" class="selectpicker" data-actions-box="true" multiple="multiple">
+      <option class="optionGroup" selected disabled>Выбор столбцов</option>
+      <option value="ves_january">Январь</option>
+      <option value="ves_february">Февраль</option>
+      <option value="ves_march">Март</option>
+      <option value="ves_april">Апрель</option>
+      <option value="ves_may">Май</option>
+      <option value="ves_june">Июнь</option>
+      <option value="ves_jule">Июль</option>
+      <option value="ves_august">Август</option>
+      <option value="ves_september">Сентябрь</option>
+      <option value="ves_october">Октябрь</option>
+      <option value="ves_november">Ноябрь</option>
+      <option value="ves_december">Декабрь</option>
+      <option value="ves_annual_values">Год</option>
+    </select><br><br>
+
+    
+  <input type="submit" name="submit" value="Применить" multiple/>
+  <a href = "{{url_for('download_ves', columns = request.form.getlist('columns'), year = request.form.getlist('year'), indicators=request.form.getlist('indicators'), station=request.form.getlist('station'))}}" class="btn btn-success">Скачать</a>
+
+  <!-------- in the end of the body -------->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<!-------- end of the body -------->
+</body>
+</div>
+</form>
+
+{% endif %}
+
+{% if not form_visible %}
+<body>
+  <a href="/" class="btn btn-success">Форма Т2</a>  
+<style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+
+form {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+body {
+  background-color: #ebf4fd;
+  font-family: "Roboto", helvetica, arial, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 50px;
+  height: 100vh;
+}
+
+input[type="submit"] {
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #f1f1f1;
+  color: black;
+  font-size: 10px;
+  padding: 8px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid #4caf50; /* Green */
+  box-shadow: 0 7px 16px 0 rgba(0, 0, 0, 0.4), 0 6px 21px 0 rgba(0, 0, 0, 0.19);
+  margin:35px 0px 0px 80px;
+}
+
+input[type="submit"]:hover {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+</style>
+    
+<form method ="post" action="/ves.html">
+  <label for="year"></label>
+  <select type="number" id = "year" name ="year" class="selectpicker" data-actions-box="true" multiple="multiple">
+    <option class="optionGroup" selected disabled>Выберите год(а)</option>
+    {% for year in range(2018, now.year+1) %}
+    <option value="{{ year }}">{{ year }}</option>
+    {% endfor %}
+
+  </select><br><br>
+
+  <label for="station"></label>
+  <select type="text" id ="station" name="station" class="selectpicker" data-live-search="true" data-actions-box="true" multiple="multiple">
+    <option class="optionGroup" selected disabled>Выбор станций</option>
+      <option value="Ульяновская ВЭС-2">Ульяновская ВЭС-2</option>
+      <option value="Каменская ВЭС">Каменская ВЭС</option>
+      <option value="Сулинская ВЭС">Сулинская ВЭС</option>
+      <option value="Гуковская ВЭС">Гуковская ВЭС</option>
+      <option value="Салынская ВЭС">Салынская ВЭС</option>
+      <option value="Целинская ВЭС">Целинская ВЭС</option>
+      <option value="Казачья ВЭС">Казачья ВЭС</option>
+      <option value="Котовская ВЭС">Котовская ВЭС</option>
+      <option value="Старицкая ВЭС">Старицкая ВЭС</option>
+      <option value="Холмская ВЭС">Холмская ВЭС</option>
+      <option value="Черноярская ВЭС">Черноярская ВЭС</option>
+      <option value="Излучная ВЭС">Излучная ВЭС</option>
+      <option value="Манланская ВЭС">Манланская ВЭС</option>
+      <option value="Ветропарк №2">Ветропарк №2</option>
+      <option value="Ветропарк №4">Ветропарк №4</option>
+      <option value="Веропарк №11">Веропарк №11</option>
+      <option value="Веропарк №15">Веропарк №15</option>
+      <option value="Ульяновская ВЭС-1">Ульяновская ВЭС-1</option>
+      <option value="Аршанская СЭС">Аршанская СЭС</option>
+      <option value="Бугульчанская СЭС (очередь 1)">Бугульчанская СЭС (очередь 1)</option>
+      <option value="Бугульчанская СЭС (очередь 2)">Бугульчанская СЭС (очередь 2)</option>
+      <option value="Бугульчанская СЭС (очередь 3)">Бугульчанская СЭС (очередь 3)</option>
+      <option value="Бугульчанская СЭС">Бугульчанская СЭС</option>
+      <option value="Плешановская СЭС">Плешановская СЭС</option>
+      <option value="Грачевская СЭС">Грачевская СЭС</option>
+      <option value="ООО Бугульчанская (БСЭС + ПСЭС + ГСЭС)">ООО Бугульчанская (БСЭС + ПСЭС + ГСЭС)</option>
+  </select><br><br>
+
+  <label for="indicator"></label>
+  <select type="text" id = "indicator" name ="indicator" class="selectpicker" data-live-search="true" data-actions-box="true" multiple="multiple">
+    <option class="optionGroup" selected disabled>Выбор показателей</option>
+    <option value="Выработка электрической энергии, всего">Выработка электрической энергии, всего</option>
+    <option value="Расход электрической энергии на собственные нужды электростанции">Расход электрической энергии на собственные нужды электростанции</option>
+    <option value="Отпуск электрической энергии с шин электростанции">Отпуск электрической энергии с шин электростанции</option>
+    <option value="Сальдо перетоков электрической энергии по электростанции">Сальдо перетоков электрической энергии по электростанции</option>
+    <option value="Потери э/э в узле">Потери э/э в узле</option>
+     </select><br><br>
+
+  <label for="columns">  </label>
+  <select type="text" id = "columns" name ="columns" class="selectpicker" data-actions-box="true" multiple="multiple">
+    <option class="optionGroup" selected disabled>Выбор столбцов</option>
+    <option value="ves_january">Январь</option>
+    <option value="ves_february">Февраль</option>
+    <option value="ves_march">Март</option>
+    <option value="ves_april">Апрель</option>
+    <option value="ves_may">Май</option>
+    <option value="ves_june">Июнь</option>
+    <option value="ves_jule">Июль</option>
+    <option value="ves_august">Август</option>
+    <option value="ves_september">Сентябрь</option>
+    <option value="ves_october">Октябрь</option>
+    <option value="ves_november">Ноябрь</option>
+    <option value="ves_december">Декабрь</option>
+    <option value="ves_annual_values">Год</option>
+  </select><br><br>
+
+  <input type="submit" name="submit" value="Применить" />
+
+<!-------- in the end of the body -------->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<!-------- end of the body -------->
+</body>
+</form>
+
+{% endif %}
+
+{% if form_visible %}
+<body>
+<style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+
+form {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+input[type="submit"]{
+  margin-left: 10px;
+}
+
+body {
+  background-color: #ebf4fd;
+  font-family: "Roboto", helvetica, arial, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+
+div.table-title {
+ display: block;
+  margin: auto;
+  max-width: 600px;
+  padding:5px;
+  width: 100%;
+}
+
+.table-title h3 {
+ color: #fafafa;
+ font-size: 20px;
+ font-weight: 300;
+ font-style:normal;
+ font-family: "Roboto", helvetica, arial, sans-serif;
+ text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+ text-transform:uppercase;
+}
+
+
+/*** Table Styles **/
+
+.table-fill {
+background: white;
+border-radius:3px;
+border-collapse: collapse;
+height: 320px;
+margin: auto;
+max-width: 600px;
+padding:5px;
+width: 100%;
+box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+animation: float 5s infinite;
+}
+
+th {
+color:#D5DDE5;;
+background:#1b1e24;
+border-bottom:4px solid #9ea7af;
+border-right: 1px solid #343a45;
+font-size:12px;
+font-weight: 80;
+padding: 15px;
+text-align:left;
+text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+vertical-align:middle;
+}
+
+th:first-child {
+border-top-left-radius:3px;
+}
+
+th:last-child {
+border-top-right-radius:3px;
+border-right:none;
+}
+
+tr {
+border-top: 1px solid #C1C3D1;
+border-bottom: 1px solid #C1C3D1;
+color:#666B85;
+font-size:10px;
+font-weight:normal;
+text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+
+tr:hover td {
+background:#4E5066;
+color:#FFFFFF;
+border-top: 1px solid #22262e;
+}
+
+tr:first-child {
+border-top:none;
+}
+
+tr:last-child {
+border-bottom:none;
+}
+
+tr:nth-child(odd) td {
+background:#EBEBEB;
+}
+
+tr:nth-child(odd):hover td {
+background:#4E5066;
+}
+
+tr:last-child td:first-child {
+border-bottom-left-radius:3px;
+}
+
+tr:last-child td:last-child {
+border-bottom-right-radius:3px;
+}
+
+td {
+background:#FFFFFF;
+padding:20px;
+text-align:left;
+vertical-align:middle;
+font-weight:300;
+font-size: 12px;
+text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+border-right: 1px solid #C1C3D1;
+}
+
+td:last-child {
+border-right: 0px;
+}
+
+th.text-left {
+text-align: left;
+}
+
+th.text-center {
+text-align: center;
+}
+
+th.text-right {
+text-align: right;
+}
+
+td.text-left {
+text-align: left;
+}
+
+td.text-center {
+text-align: center;
+}
+
+td.text-right {
+text-align: right;
+}
+</style>
+<tbody class="table-hover">
+
+<table class="table-fill">
+  <thead>
+    <tr>
+      {% for column in columns %}
+      <th>{{ column }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+
+{% for row in rows %}
+    <tr>
+      {% for column in columns %}
+      <td>{{ row[loop.index0]}}</td>
+      {% endfor %}
+    </tr>
+{% endfor %}
+    </tbody>
+  </table>
+</body>
+
+{% endif %}
+
+<body> 
+{% if not form_visible %}
+{% endif %}
+</body>
+
+</html>

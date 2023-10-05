@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Форма Т2</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+  
+</head>
+
+{% if form_visible %}
+<body>
+
+<a href=".\ves.html" class="btn btn-success">ВИЭ</a>
+
+<style>
+  input[type="submit"] {
+    background-color: #f1f1f1;
+    color: black;
+    font-size: 11px;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 2px solid #4caf50; /* Green */
+    box-shadow: 0 7px 16px 0 rgba(0, 0, 0, 0.4), 0 6px 21px 0 rgba(0, 0, 0, 0.19);
+    margin:35px 35px 35px 300px;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #4caf50; /* Green */
+    color: white;
+  }
+
+</style>
+
+<div id="select">
+
+  <form method ="post" action="/">
+    <label for="year"></label>
+    <select type="number" id = "year" name ="year" class="selectpicker" data-actions-box="true" multiple="multiple">
+      <option class="optionGroup" selected disabled>Выберите год(а) </option>
+      {% for year in range(2014, now.year+1) %}
+      <option value="{{ year }}"{% if year in selected_years %} selected{% endif %}>{{ year }}</option>
+      {% endfor %}
+    </select><br><br>
+
+    <label for="station"></label>
+    <select type="text" id ="station" name="station" class="selectpicker" data-live-search="true" data-actions-box="true" multiple="multiple">
+      <option class="optionGroup" selected disabled>Выбор станций </option>
+      {% for station in stations_t2 %}
+      <option value="{{ station }}"{% if station in selected_stations %} selected{% endif %}>{{ station }}</option>
+      {% endfor %}
+    </select><br><br>
+
+    <label for="indicator"></label>
+    <select type="text" id = "indicator" name ="indicator" class="selectpicker" data-live-search="true" data-actions-box="true" multiple="multiple">
+      <option class="optionGroup" selected disabled>Выбор показателей </option>
+      {% for indicator in indicators_t2 %}
+      <option value="{{ indicator }}"{% if indicator in selected_indicators %} selected{% endif %}>{{ indicator }}</option>
+      {% endfor %}
+    </select><br><br>
+
+    <label for="columns">  </label>
+    <select type="text" id = "columns" name ="columns" class="selectpicker" data-actions-box="true" multiple="multiple">
+      <option class="optionGroup" selected disabled>Выбор столбцов(факт)</option>
+      <option value="station_ego">ЕГО в работе, ХР, ремонте</option>
+      <option value="fact_january">Январь</option>
+      <option value="fact_february">Февраль</option>
+      <option value="fact_march">Март</option>
+      <option value="fact_q1">1 Квартал</option>
+      <option value="fact_april">Апрель</option>
+      <option value="fact_may">Май</option>
+      <option value="fact_june">Июнь</option>
+      <option value="fact_q2">2 Квартал</option>
+      <option value="fact_jule">Июль</option>
+      <option value="fact_august">Август</option>
+      <option value="fact_september">Сентябрь</option>
+      <option value="fact_q3">3 Квартал</option>
+      <option value="fact_october">Октябрь</option>
+      <option value="fact_november">Ноябрь</option>
+      <option value="fact_december">Декабрь</option>
+      <option value="fact_q4">4 Квартал</option>
+      <option value="fact_annual_values">Год</option>
+    </select><br><br>
+
+    <label for="columns"></label>
+    <select type="text" id = "columns" name ="columns" class="selectpicker" data-actions-box="true" multiple="multiple">
+      <option class="optionGroup" selected disabled>Выбор столбцов(БП)</option>
+      <option value="station_ego">ЕГО в работе, ХР, ремонте</option>
+      <option value="bp_january">Январь</option>
+      <option value="bp_february">Февраль</option>
+      <option value="bp_march">Март</option>
+      <option value="bp_q1">1 Квартал</option>
+      <option value="bp_april">Апрель</option>
+      <option value="bp_may">Май</option>
+      <option value="bp_june">Июнь</option>
+      <option value="bp_q2">2 Квартал</option>
+      <option value="bp_jule">Июль</option>
+      <option value="bp_august">Август</option>
+      <option value="bp_september">Сентябрь</option>
+      <option value="bp_q3">3 Квартал</option>
+      <option value="bp_october">Октябрь</option>
+      <option value="bp_november">Ноябрь</option>
+      <option value="bp_december">Декабрь</option>
+      <option value="bp_q4">4 Квартал</option>
+      <option value="bp_annual_values">Год</option>
+    </select><br><br>
+
+    <label for="columns"></label>
+    <select type="text" id = "columns" name ="columns" class="selectpicker" data-actions-box="true" multiple="multiple">
+      <option class="optionGroup" selected disabled>Выбор столбцов(EST)</option>
+      <option value="station_ego">ЕГО в работе, ХР, ремонте</option>
+      <option value="est_january">Январь</option>
+      <option value="est_february">Февраль</option>
+      <option value="est_march">Март</option>
+      <option value="est_q1">1 Квартал</option>
+      <option value="est_april">Апрель</option>
+      <option value="est_may">Май</option>
+      <option value="est_june">Июнь</option>
+      <option value="est_q2">2 Квартал</option>
+      <option value="est_jule">Июль</option>
+      <option value="est_august">Август</option>
+      <option value="est_september">Сентябрь</option>
+      <option value="est_q3">3 Квартал</option>
+      <option value="est_october">Октябрь</option>
+      <option value="est_november">Ноябрь</option>
+      <option value="est_december">Декабрь</option>
+      <option value="est_q4">4 Квартал</option>
+      <option value="est_annual_values">Год</option>
+    </select><br><br>
+
+  <input type="submit" name="submit" value="Применить" multiple/>
+  <a href = "{{url_for('download', columns = request.form.getlist('columns'), year = request.form.getlist('year'), indicators=request.form.getlist('indicators'), station=request.form.getlist('station'))}}" class="btn btn-success">Скачать</a>
+
+  <!-------- in the end of the body -------->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<!-------- end of the body -------->
+</body>
+</div>
+</form>
+
+{% endif %}
+
+{% if not form_visible %}
+<body>
+<style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+
+form {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+body {
+  background-color: #ebf4fd;
+  font-family: "Roboto", helvetica, arial, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 50px;
+  height: 100vh;
+}
+
+input[type="submit"] {
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #f1f1f1;
+  color: black;
+  font-size: 10px;
+  padding: 8px 15px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid #4caf50; /* Green */
+  box-shadow: 0 7px 16px 0 rgba(0, 0, 0, 0.4), 0 6px 21px 0 rgba(0, 0, 0, 0.19);
+  margin:35px 0px 0px 80px;
+}
+
+input[type="submit"]:hover {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+</style>
+
+<a href="ves.html" class="btn btn-success">ВИЭ</a>
+    
+<form method ="post" action="/">
+  <label for="year"></label>
+  <select type="number" id = "year" name ="year" class="selectpicker" data-actions-box="true" multiple="multiple">
+    <option class="optionGroup" selected disabled>Выберите год(а)</option>
+    {% for year in range(2014, now.year+1) %}
+    <option value="{{ year }}">{{ year }}</option>
+    {% endfor %}
+
+  </select><br><br>
+
+  <label for="station"></label>
+  <select type="text" id ="station" name="station" class="selectpicker" data-live-search="true" data-actions-box="true" multiple="multiple">
+    <option class="optionGroup" selected disabled>Выбор станций</option>
+    <optgroup label="Челябинск">
+      <option value="челябинск">челябинск</option>
+      <option value="чтэц-1">чтэц-1</option>
+      <option value="чтэц-1 гту">чтэц-1 гту</option>
+      <option value="чтэц-1 ПТ">чтэц-1 ПТ</option>
+      <option value="чтэц-2">чтэц-2</option>
+      <option value="чтэц-3">чтэц-3</option>
+      <option value="чтэц-3 Блок 1">чтэц-3 Блок 1</option>
+      <option value="чтэц-3 Блок 2">чтэц-3 Блок 2</option>
+      <option value="чтэц-3 Блоки Т-180">чтэц-3 Блоки Т-180</option>
+      <option value="чтэц-3 пгу-3">чтэц-3 пгу-3</option>
+      <option value="чтэц-4">чтэц-4</option>
+      <option value="чтэц-4 пгу-1">чтэц-4 пгу-1</option>
+      <option value="чтэц-4 пгу-2">чтэц-4 пгу-2</option>
+      <option value="чтэц-4 пгу-3">чтэц-4 пгу-3</option>
+      <option value="атэц">атэц</option>
+    </optgroup>
+    <optgroup label="Тюмень">
+        <option value="тюмень">тюмень</option>
+        <option value="ттэц-1">ттэц-1</option>
+        <option value="ттэц-1 пгу-1">ттэц-1 пгу-1</option>
+        <option value="ттэц-1 пгу-2">ттэц-1 пгу-2</option>
+        <option value="ттэц-1 тг-567">ттэц-1 тг-567</option>
+        <option value="ттэц-1 пгу-1 и тг-567">ттэц-1 пгу-1 и тг-567</option>
+        <option value="ттэц-2">ттэц-2</option>
+        <option value="ттэц-2 Блоки Т-180">ттэц-2 Блоки Т-180</option>
+        <option value="ттэц-2 Блок К-215">ттэц-2 Блок К-215</option>
+      </optgroup>
+        <optgroup label="Нягрэс">
+        <option value="нягрэс">нягрэс</option>
+        <option value="нягрэс блок 1">нягрэс блок 1</option>
+        <option value="нягрэс блок 2">нягрэс блок 2</option>
+        <option value="нягрэс блок 3">нягрэс блок 3</option>
+      </optgroup>
+        <optgroup label="Фортум">
+        <option value="фортум (ТЭС + БСЭС + УВЭС-1)">фортум (ТЭС + БСЭС + УВЭС-1)</option>
+        <option value="фортум ТЭС">фортум ТЭС</option>
+  </select><br><br>
+
+  <label for="indicator"></label>
+  <select type="text" id = "indicator" name ="indicator" class="selectpicker" data-live-search="true" data-actions-box="true" multiple="multiple">
+    <option class="optionGroup" selected disabled>Выбор показателей</option>
+    <option value="Выработка электроэнергии -всего">Выработка электроэнергии - всего</option>
+    <option value="Выработка по теплофикационному циклу">Выработка по теплофикационному циклу</option>
+    <option value="Выработка по конденсационному циклу">Выработка по конденсационному циклу</option>
+    <option value="Расход электроэнергии на собственные нужды - всего">Расход электроэнергии на собственные нужды - всего</option>
+    <option value="Расход электроэнергии СН на производство электроэнергии">Расход электроэнергии СН на производство электроэнергии</option>
+    <option value="Расход электроэнергии на производство электроэнергии СН то же в % к выработке электроэнергии">Расход электроэнергии на производство электроэнергии СН то же в % к выработке электроэнергии</option>
+    <option value="Расход электроэнергии СН на производство теплоэнергии">Расход электроэнергии СН на производство теплоэнергии</option>
+    <option value="Расход электроэнергии СН на производство теплоэнергии то же в кВт.ч/Гкал">Расход электроэнергии СН на производство теплоэнергии то же в кВт.ч/Гкал</option>
+    <option value="Отпуск электроэнергии с шин электростанции-всего">Отпуск электроэнергии с шин электростанции-всего</option>
+    <option value="Отпуск электроэнергии с шин по теплофикационному циклу ">Отпуск электроэнергии с шин по теплофикационному циклу</option>
+    <option value="Отпуск электроэнергии с шин по конденсационному циклу ">Отпуск электроэнергии с шин по конденсационному циклу</option>
+    <option value="Расход электроэнергии на -всего:">Расход электроэнергии на -всего:</option>
+    <option value="Расход электроэнергии на производственные и хозяйственные нужды">Расход электроэнергии на производственные и хозяйственные нужды</option>
+    <option value="Расход электроэнергии на покупку на ОРЭМ">Расход электроэнергии на покупку на ОРЭМ</option>
+    <option value="Расход электроэнергии в т.ч. покупка на ОРЭМ то же в % к отпуску с шин">Расход электроэнергии в т.ч. покупка на ОРЭМ то же в % к отпуску с шин</option>
+    <option value="Расход электроэнергии на потери в пристанционной электросети">Расход электроэнергии на потери в пристанционной электросети</option>
+    <option value="Расход электроэнергии на потери в пристанционной электросети то же в % к отпуску с шин">Расход электроэнергии на потери в пристанционной электросети то же в % к отпуску с шин</option>
+    <option value="Отпуск электроэнергии в сеть (сальдо-переток)-всего">Отпуск электроэнергии в сеть (сальдо-переток)-всего</option>
+    <option value="Отпуск электроэнергии в сеть (сальдо-переток) по теплофикационному циклу ">Отпуск электроэнергии в сеть (сальдо-переток) по теплофикационному циклу </option>
+    <option value="Отпуск электроэнергии в сеть (сальдо-переток) по конденсационному циклу ">Отпуск электроэнергии в сеть (сальдо-переток) по конденсационному циклу </option>
+    <option value="Отпуск теплоэнергии с коллекторов -всего">Отпуск теплоэнергии с коллекторов -всего</option>
+    <option value="Расход теплоэнергии на производственные и хозяйственные нужды: ">Расход теплоэнергии на производственные и хозяйственные нужды: </option>
+    <option value="Расход теплоэнергии на производственные и хозяйственные нужды то же в % к отпуску с коллекторов">Расход теплоэнергии на производственные и хозяйственные нужды то же в % к отпуску с коллекторов</option>
+    <option value="Отпуск теплоэнергии в сеть -всего">Отпуск теплоэнергии в сеть -всего</option>
+    <option value="Отпуск теплоэнергии в сеть в горячей воде">Отпуск теплоэнергии в сеть в горячей воде</option>
+    <option value="Отпуск теплоэнергии в сеть в отборном паре">Отпуск теплоэнергии в сеть в отборном паре</option>
+    <option value="Отпуск теплоэнергии в сеть в остром паре">Отпуск теплоэнергии в сеть в остром паре</option>
+    <option value="Отпуск теплоносителя -всего">Отпуск теплоносителя -всего</option>
+    <option value="подпитка теплосети (ХОВ)">подпитка теплосети (ХОВ)</option>
+    <option value="невозврат конденсата (ОВ)">невозврат конденсата (ОВ)</option>
+    <option value="Приведенный полезный отпуск электроэнергии *">Приведенный полезный отпуск электроэнергии *</option>
+    <option value="Удельный расход условного топлива на производство электроэнергии">Удельный расход условного топлива на производство электроэнергии</option>
+    <option value="Удельный расход условного топлива на производство электроэнергии по теплофикационному циклу ">Удельный расход условного топлива на производство электроэнергии по теплофикационному циклу </option>
+    <option value="Удельный расход условного топлива на производство электроэнергии по конденсационному циклу ">Удельный расход условного топлива на производство электроэнергии по конденсационному циклу </option>
+    <option value="Удельный расход условного топлива на производство теплоэнергии">Удельный расход условного топлива на производство теплоэнергии</option>
+    <option value="Условное топливо -всего:">Условное топливо -всего:</option>
+    <option value="Условное топливо на производство электроэнергии ">Условное топливо на производство электроэнергии </option>
+    <option value="удельный вес расхода топлива на э/э">удельный вес расхода топлива на э/э</option>
+    <option value="Условное топливо на производство теплоэнергии ">Условное топливо на производство теплоэнергии </option>
+    <option value="Условное топливо на производство теплоэнергии в горячей воде">Условное топливо на производство теплоэнергии в горячей воде</option>
+    <option value="Условное топливо на производство теплоэнергии в отборном паре">Условное топливо на производство теплоэнергии в отборном паре</option>
+    <option value="Условное топливо на производство теплоэнергии в остром паре">Условное топливо на производство теплоэнергии в остром паре</option>
+    <option value="Условное топливо(по видам), всего">Условное топливо(по видам), всего</option>
+    <option value="в том числе:">в том числе:</option>
+    <option value="Условное топливо(по видам), - Уголь">Условное топливо(по видам), - Уголь</option>
+    <option value="Условное топливо(по видам), - Челябинский уголь">Условное топливо(по видам), - Челябинский уголь</option>
+    <option value="Условное топливо(по видам), - Майкубенский уголь">Условное топливо(по видам), - Майкубенский уголь</option>
+    <option value="Условное топливо(по видам), - Кузнецкий уголь">Условное топливо(по видам), - Кузнецкий уголь</option>
+    <option value="Условное топливо(по видам), - Газ">Условное топливо(по видам), - Газ</option>
+    <option value="Условное топливо(по видам), - Мазут">Условное топливо(по видам), - Мазут</option>
+    <option value="Условное топливо(по видам), - Газотурбинное">Условное топливо(по видам), - Газотурбинное</option>
+    <option value="Калорийность натурального топлива">Калорийность натурального топлива</option>
+    <option value="Калорийность натурального топлива - Уголь">Калорийность натурального топлива - Уголь</option>
+    <option value="Калорийность натурального топлива - Челябинский уголь">Калорийность натурального топлива - Челябинский уголь</option>
+    <option value="Калорийность натурального топлива - Майкубенский уголь">Калорийность натурального топлива - Майкубенский уголь</option>
+    <option value="Калорийность натурального топлива - Кузнецкий уголь">Калорийность натурального топлива - Кузнецкий уголь</option>
+    <option value="Калорийность натурального топлива - Газ">Калорийность натурального топлива - Газ</option>
+    <option value="Калорийность натурального топлива - Мазут">Калорийность натурального топлива - Мазут</option>
+    <option value="Калорийность натурального топлива - Газотурбинное">Калорийность натурального топлива - Газотурбинное</option>
+    <option value="Переводной коэффициент калорийности:">Переводной коэффициент калорийности:</option>
+    <option value="Переводной коэффициент калорийности - Уголь">Переводной коэффициент калорийности - Уголь</option>
+    <option value="Переводной коэффициент калорийности - Челябинский уголь">Переводной коэффициент калорийности - Челябинский уголь</option>
+    <option value="Переводной коэффициент калорийности - Майкубенский уголь">Переводной коэффициент калорийности - Майкубенский уголь</option>
+    <option value="Переводной коэффициент калорийности - Кузнецкий уголь">Переводной коэффициент калорийности - Кузнецкий уголь</option>
+    <option value="Переводной коэффициент калорийности - Газ">Переводной коэффициент калорийности - Газ</option>
+    <option value="Переводной коэффициент калорийности - Мазут">Переводной коэффициент калорийности - Мазут</option>
+    <option value="Переводной коэффициент калорийности - Газотурбинное">Переводной коэффициент калорийности - Газотурбинное</option>
+    <option value="Натуральное топливо(повидам), всего:">Натуральное топливо(повидам), всего:</option>
+    <option value="Натуральное топливо(повидам), - Уголь">Натуральное топливо(повидам), - Уголь</option>
+    <option value="Натуральное топливо(повидам), - Челябинский уголь">Натуральное топливо(повидам), - Челябинский уголь</option>
+    <option value="Натуральное топливо(повидам), - Майкубенский уголь">Натуральное топливо(повидам), - Майкубенский уголь</option>
+    <option value="Натуральное топливо(повидам), - Кузнецкий уголь">Натуральное топливо(повидам), - Кузнецкий уголь</option>
+    <option value="Натуральное топливо(повидам), - Газ">Натуральное топливо(повидам), - Газ</option>
+    <option value="Натуральное топливо(повидам), - Мазут">Натуральное топливо(повидам), - Мазут</option>
+    <option value="Натуральное топливо(повидам), - Газотурбинное">Натуральное топливо(повидам), - Газотурбинное</option>
+    <option value="Число часов в работе">Число часов в работе</option>
+    <option value="Число часов в холодном резерве">Число часов в холодном резерве</option>
+    <option value="Число часов в ремонте">Число часов в ремонте</option>
+    <option value="Температура наружного воздуха">Температура наружного воздуха</option>
+    <option value="Цена на РСВ">Цена на РСВ</option>
+  </select><br><br>
+
+    <label for="columns">  </label>
+    <select type="text" id = "columns" name ="columns" class="selectpicker" data-actions-box="true" multiple="multiple">
+      <option class="optionGroup" selected disabled>Выбор столбцов(факт)</option>
+      <option value="station_ego">ЕГО в работе, ХР, ремонте</option>
+      <option value="fact_january">Январь</option>
+      <option value="fact_february">Февраль</option>
+      <option value="fact_march">Март</option>
+      <option value="fact_q1">1 Квартал</option>
+      <option value="fact_april">Апрель</option>
+      <option value="fact_may">Май</option>
+      <option value="fact_june">Июнь</option>
+      <option value="fact_q2">2 Квартал</option>
+      <option value="fact_jule">Июль</option>
+      <option value="fact_august">Август</option>
+      <option value="fact_september">Сентябрь</option>
+      <option value="fact_q3">3 Квартал</option>
+      <option value="fact_october">Октябрь</option>
+      <option value="fact_november">Ноябрь</option>
+      <option value="fact_december">Декабрь</option>
+      <option value="fact_q4">4 Квартал</option>
+      <option value="fact_annual_values">Год</option>
+    </select><br><br>
+
+    <label for="columns"></label>
+    <select type="text" id = "columns" name ="columns" class="selectpicker" data-actions-box="true" multiple="multiple">
+      <option class="optionGroup" selected disabled>Выбор столбцов(БП)</option>
+      <option value="station_ego">ЕГО в работе, ХР, ремонте</option>
+      <option value="bp_january">Январь</option>
+      <option value="bp_february">Февраль</option>
+      <option value="bp_march">Март</option>
+      <option value="bp_q1">1 Квартал</option>
+      <option value="bp_april">Апрель</option>
+      <option value="bp_may">Май</option>
+      <option value="bp_june">Июнь</option>
+      <option value="bp_q2">2 Квартал</option>
+      <option value="bp_jule">Июль</option>
+      <option value="bp_august">Август</option>
+      <option value="bp_september">Сентябрь</option>
+      <option value="bp_q3">3 Квартал</option>
+      <option value="bp_october">Октябрь</option>
+      <option value="bp_november">Ноябрь</option>
+      <option value="bp_december">Декабрь</option>
+      <option value="bp_q4">4 Квартал</option>
+      <option value="bp_annual_values">Год</option>
+    </select><br><br>
+
+    <label for="columns"></label>
+    <select type="text" id = "columns" name ="columns" class="selectpicker" data-actions-box="true" multiple="multiple">
+      <option class="optionGroup" selected disabled>Выбор столбцов(EST)</option>
+      <option value="station_ego">ЕГО в работе, ХР, ремонте</option>
+      <option value="est_january">Январь</option>
+      <option value="est_february">Февраль</option>
+      <option value="est_march">Март</option>
+      <option value="est_q1">1 Квартал</option>
+      <option value="est_april">Апрель</option>
+      <option value="est_may">Май</option>
+      <option value="est_june">Июнь</option>
+      <option value="est_q2">2 Квартал</option>
+      <option value="est_jule">Июль</option>
+      <option value="est_august">Август</option>
+      <option value="est_september">Сентябрь</option>
+      <option value="est_q3">3 Квартал</option>
+      <option value="est_october">Октябрь</option>
+      <option value="est_november">Ноябрь</option>
+      <option value="est_december">Декабрь</option>
+      <option value="est_q4">4 Квартал</option>
+      <option value="est_annual_values">Год</option>
+    </select><br><br>
+
+  <input type="submit" name="submit" value="Применить" />
+
+<!-------- in the end of the body -------->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<!-------- end of the body -------->
+</body>
+</form>
+
+{% endif %}
+
+{% if form_visible %}
+<body>
+
+<style>
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100);
+
+form {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+input[type="submit"]{
+  margin-left: 10px;
+}
+
+body {
+  background-color: #ebf4fd;
+  font-family: "Roboto", helvetica, arial, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+
+div.table-title {
+ display: block;
+  margin: auto;
+  max-width: 600px;
+  padding:5px;
+  width: 100%;
+}
+
+.table-title h3 {
+ color: #fafafa;
+ font-size: 20px;
+ font-weight: 300;
+ font-style:normal;
+ font-family: "Roboto", helvetica, arial, sans-serif;
+ text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+ text-transform:uppercase;
+}
+
+
+/*** Table Styles **/
+
+.table-fill {
+background: white;
+border-radius:3px;
+border-collapse: collapse;
+height: 320px;
+margin: auto;
+max-width: 600px;
+padding:5px;
+width: 100%;
+box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+animation: float 5s infinite;
+}
+
+th {
+color:#D5DDE5;;
+background:#1b1e24;
+border-bottom:4px solid #9ea7af;
+border-right: 1px solid #343a45;
+font-size:12px;
+font-weight: 80;
+padding: 15px;
+text-align:left;
+text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+vertical-align:middle;
+}
+
+th:first-child {
+border-top-left-radius:3px;
+}
+
+th:last-child {
+border-top-right-radius:3px;
+border-right:none;
+}
+
+tr {
+border-top: 1px solid #C1C3D1;
+border-bottom: 1px solid #C1C3D1;
+color:#666B85;
+font-size:10px;
+font-weight:normal;
+text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+
+tr:hover td {
+background:#4E5066;
+color:#FFFFFF;
+border-top: 1px solid #22262e;
+}
+
+tr:first-child {
+border-top:none;
+}
+
+tr:last-child {
+border-bottom:none;
+}
+
+tr:nth-child(odd) td {
+background:#EBEBEB;
+}
+
+tr:nth-child(odd):hover td {
+background:#4E5066;
+}
+
+tr:last-child td:first-child {
+border-bottom-left-radius:3px;
+}
+
+tr:last-child td:last-child {
+border-bottom-right-radius:3px;
+}
+
+td {
+background:#FFFFFF;
+padding:20px;
+text-align:left;
+vertical-align:middle;
+font-weight:300;
+font-size: 12px;
+text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+border-right: 1px solid #C1C3D1;
+}
+
+td:last-child {
+border-right: 0px;
+}
+
+th.text-left {
+text-align: left;
+}
+
+th.text-center {
+text-align: center;
+}
+
+th.text-right {
+text-align: right;
+}
+
+td.text-left {
+text-align: left;
+}
+
+td.text-center {
+text-align: center;
+}
+
+td.text-right {
+text-align: right;
+}
+</style>
+
+<tbody class="table-hover">
+
+<table class="table-fill">
+  <thead>
+    <tr>
+      {% for column in columns %}
+      <th>{{ column }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+
+{% for row in rows %}
+    <tr>
+      {% for column in columns %}
+      <td>{{ row[loop.index0]}}</td>
+      {% endfor %}
+    </tr>
+{% endfor %}
+    </tbody>
+  </table>
+</body>
+
+{% endif %}
+
+<body> 
+{% if not form_visible %}
+{% endif %}
+</body>
+
+</html>

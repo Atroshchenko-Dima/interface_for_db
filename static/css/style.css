@@ -1,0 +1,11 @@
+.optionGroup {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.dotted-link {
+  color: #69b406; /* Цвет ссылки */
+  text-decoration: none; /* Убираем подчёркивание */
+  border-bottom: 1px dashed #69b406; /* Добавляем свою линию */ 
+}
+
